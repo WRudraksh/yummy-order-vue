@@ -1,0 +1,66 @@
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface Order {
+  id: string;
+  customerName: string;
+  items: string;
+  status: "Pending" | "Delivered";
+  total: string;
+  time: string;
+}
+
+const mockOrders: Order[] = [
+  { id: "001", customerName: "John Doe", items: "Burger, Fries", status: "Pending", total: "$12.50", time: "10:30 AM" },
+  { id: "002", customerName: "Jane Smith", items: "Pizza, Coke", status: "Delivered", total: "$18.00", time: "10:15 AM" },
+  { id: "003", customerName: "Mike Johnson", items: "Salad, Juice", status: "Pending", total: "$9.99", time: "10:45 AM" },
+  { id: "004", customerName: "Sarah Williams", items: "Pasta, Wine", status: "Delivered", total: "$22.50", time: "10:00 AM" },
+];
+
+export const OrdersTable = () => {
+  return (
+    <Card className="border-2 border-primary shadow-lg">
+      <CardHeader className="bg-secondary/30">
+        <CardTitle className="text-2xl font-bold text-foreground">Live Orders 🍔</CardTitle>
+      </CardHeader>
+      <CardContent className="p-6">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b-2 border-primary">
+                <th className="text-left py-3 px-4 font-semibold text-foreground">Order ID</th>
+                <th className="text-left py-3 px-4 font-semibold text-foreground">Customer</th>
+                <th className="text-left py-3 px-4 font-semibold text-foreground">Items</th>
+                <th className="text-left py-3 px-4 font-semibold text-foreground">Status</th>
+                <th className="text-left py-3 px-4 font-semibold text-foreground">Total</th>
+                <th className="text-left py-3 px-4 font-semibold text-foreground">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mockOrders.map((order) => (
+                <tr key={order.id} className="border-b border-border hover:bg-secondary/20 transition-colors">
+                  <td className="py-3 px-4 font-medium text-foreground">#{order.id}</td>
+                  <td className="py-3 px-4 text-foreground">{order.customerName}</td>
+                  <td className="py-3 px-4 text-foreground">{order.items}</td>
+                  <td className="py-3 px-4">
+                    <Badge 
+                      className={
+                        order.status === "Delivered" 
+                          ? "bg-success text-success-foreground hover:bg-success/90" 
+                          : "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                      }
+                    >
+                      {order.status}
+                    </Badge>
+                  </td>
+                  <td className="py-3 px-4 font-semibold text-foreground">{order.total}</td>
+                  <td className="py-3 px-4 text-muted-foreground">{order.time}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
