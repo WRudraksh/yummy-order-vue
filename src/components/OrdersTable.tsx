@@ -11,17 +11,17 @@ interface Order {
 }
 
 const mockOrders: Order[] = [
-  { id: "001", customerName: "John Doe", items: "Burger, Fries", status: "Pending", total: "$12.50", time: "10:30 AM" },
-  { id: "002", customerName: "Jane Smith", items: "Pizza, Coke", status: "Delivered", total: "$18.00", time: "10:15 AM" },
-  { id: "003", customerName: "Mike Johnson", items: "Salad, Juice", status: "Pending", total: "$9.99", time: "10:45 AM" },
-  { id: "004", customerName: "Sarah Williams", items: "Pasta, Wine", status: "Delivered", total: "$22.50", time: "10:00 AM" },
+  { id: "001", customerName: "John Doe", items: "Chicken burger", status: "Pending", total: "₹120", time: "10:30 AM" },
+  { id: "002", customerName: "Jane Smith", items: "Paneer burger, French Fries", status: "Delivered", total: "₹140", time: "10:15 AM" },
+  { id: "003", customerName: "Mike Johnson", items: "Cheese Fries", status: "Pending", total: "₹65", time: "10:45 AM" },
+  { id: "004", customerName: "Sarah Williams", items: "Aloo tikki burger", status: "Delivered", total: "₹60", time: "10:00 AM" },
 ];
 
 export const OrdersTable = () => {
   return (
     <Card className="border-2 border-primary shadow-lg">
       <CardHeader className="bg-secondary/30">
-        <CardTitle className="text-2xl font-bold text-foreground">Live Orders 🍔</CardTitle>
+        <CardTitle className="text-2xl font-bold text-foreground">Live Orders</CardTitle>
       </CardHeader>
       <CardContent className="p-6">
         <div className="overflow-x-auto">
@@ -47,7 +47,7 @@ export const OrdersTable = () => {
                       className={
                         order.status === "Delivered" 
                           ? "bg-success text-success-foreground hover:bg-success/90" 
-                          : "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          : "bg-warning text-warning-foreground hover:bg-warning/90"
                       }
                     >
                       {order.status}

@@ -2,28 +2,41 @@ import { OrdersTable } from "@/components/OrdersTable";
 import { MenuDisplay } from "@/components/MenuDisplay";
 import { IngredientsSheet } from "@/components/IngredientsSheet";
 import { StatsCards } from "@/components/StatsCards";
-import burgerArt from "@/assets/burger-art.png";
-import friesArt from "@/assets/fries-art.png";
+import { Chatbot } from "@/components/Chatbot";
+import { RevenueChart } from "@/components/RevenueChart";
+import burgerDoodle from "@/assets/burger-doodle.png";
+import friesDoodle from "@/assets/fries-doodle.png";
+import pizzaDoodle from "@/assets/pizza-doodle.png";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Background decorative images */}
-      <div className="fixed inset-0 pointer-events-none opacity-5">
+      {/* Background decorative doodles */}
+      <div className="fixed inset-0 pointer-events-none opacity-10">
         <img 
-          src={burgerArt} 
+          src={burgerDoodle} 
           alt="" 
-          className="absolute top-20 right-10 w-64 h-auto rotate-12"
+          className="absolute top-20 right-10 w-48 h-auto rotate-12"
         />
         <img 
-          src={friesArt} 
+          src={friesDoodle} 
           alt="" 
-          className="absolute bottom-20 left-10 w-48 h-auto -rotate-12"
+          className="absolute bottom-20 left-10 w-40 h-auto -rotate-12"
         />
         <img 
-          src={burgerArt} 
+          src={pizzaDoodle} 
           alt="" 
-          className="absolute bottom-40 right-1/4 w-40 h-auto rotate-45 opacity-50"
+          className="absolute top-1/2 left-1/4 w-32 h-auto rotate-45"
+        />
+        <img 
+          src={burgerDoodle} 
+          alt="" 
+          className="absolute bottom-40 right-1/4 w-36 h-auto -rotate-12"
+        />
+        <img 
+          src={friesDoodle} 
+          alt="" 
+          className="absolute top-1/3 right-1/3 w-32 h-auto rotate-90"
         />
       </div>
 
@@ -51,10 +64,18 @@ const Index = () => {
 
         {/* Stats Section */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-4">Today's Insights 📊</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-4">Insights & Analytics</h2>
           <StatsCards />
         </div>
+
+        {/* Charts Section */}
+        <div className="mb-8">
+          <RevenueChart />
+        </div>
       </div>
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   );
 };

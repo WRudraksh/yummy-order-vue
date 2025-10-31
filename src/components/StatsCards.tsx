@@ -1,34 +1,43 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { TrendingUp, DollarSign, ShoppingCart, Clock } from "lucide-react";
+import { TrendingUp, DollarSign, ShoppingCart, Utensils } from "lucide-react";
+import { useGoogleSheetData } from "@/hooks/useGoogleSheetData";
+
+const CSV_URL = "https://docs.google.com/spreadsheets/d/1igQ7X5gwJW1kTjN_znKzyhoK9TmHYKnDv8epZEaHjsk/export?format=csv";
 
 export const StatsCards = () => {
+  const { data: menuItems } = useGoogleSheetData(CSV_URL);
+  
+  const totalRevenue = menuItems.reduce((sum, item) => sum + item.price, 0);
+  const avgPrice = menuItems.length > 0 ? Math.round(totalRevenue / menuItems.length) : 0;
+  const availableItems = menuItems.filter(item => item.availability.toLowerCase() === "yes").length;
+
   const stats = [
     {
-      title: "Today's Orders",
-      value: "48",
-      icon: ShoppingCart,
-      trend: "+12%",
+      title: "Total Menu Items",
+      value: menuItems.length.toString(),
+      icon: Utensils,
+      trend: `${availableItems} available`,
       trendUp: true,
     },
     {
-      title: "Revenue",
-      value: "$1,245",
+      title: "Avg. Item Price",
+      value: `₹${avgPrice}`,
       icon: DollarSign,
-      trend: "+8%",
+      trend: "across menu",
       trendUp: true,
     },
     {
-      title: "Avg. Prep Time",
-      value: "18 min",
-      icon: Clock,
-      trend: "-3 min",
+      title: "Total Orders",
+      value: "4",
+      icon: ShoppingCart,
+      trend: "active orders",
       trendUp: true,
     },
     {
-      title: "Popular Item",
-      value: "Burgers",
+      title: "Most Expensive",
+      value: `₹${Math.max(...menuItems.map(i => i.price))}`,
       icon: TrendingUp,
-      trend: "35 sold",
+      trend: menuItems.find(i => i.price === Math.max(...menuItems.map(m => m.price)))?.foodItem || "",
       trendUp: true,
     },
   ];
@@ -43,10 +52,9 @@ export const StatsCards = () => {
                 <p className="text-sm font-medium text-muted-foreground mb-1">{stat.title}</p>
                 <h3 className="text-3xl font-bold text-foreground mb-2">{stat.value}</h3>
                 <div className="flex items-center gap-1">
-                  <span className={`text-sm font-semibold ${stat.trendUp ? 'text-success' : 'text-destructive'}`}>
+                  <span className="text-sm font-semibold text-primary">
                     {stat.trend}
                   </span>
-                  <span className="text-xs text-muted-foreground">vs yesterday</span>
                 </div>
               </div>
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
