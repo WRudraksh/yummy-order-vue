@@ -43,7 +43,7 @@ export const Chatbot = () => {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg hover:scale-110 transition-transform"
+          className="fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg hover:scale-110 transition-transform z-50"
           size="icon"
         >
           <MessageSquare className="w-6 h-6" />
@@ -51,7 +51,7 @@ export const Chatbot = () => {
       )}
 
       {isOpen && (
-        <Card className="fixed bottom-6 right-6 w-96 h-[500px] shadow-2xl border-2 border-primary flex flex-col">
+        <Card className="fixed bottom-6 right-6 w-96 h-[500px] shadow-2xl border-2 border-primary flex flex-col z-50">
           <CardHeader className="bg-secondary/30 flex flex-row items-center justify-between py-3">
             <CardTitle className="text-lg">Chat Assistant</CardTitle>
             <Button
